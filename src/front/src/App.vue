@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    Circle of Knowleddge
+    <router-view></router-view>
   </div>
 </template>
 
@@ -9,6 +9,6 @@
 export default {
   name: 'app',
   components: {
-  }
-}
+  },
+};
 </script>

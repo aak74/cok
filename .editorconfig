@@ -11,10 +11,6 @@ indent_style = space
 indent_size = 2
 charset = utf-8
 
-[*.php]
-indent_size = 4
-
-
 [{Makefile, *.conf}]
 indent_size = 4
 indent_style = tab

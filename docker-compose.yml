@@ -15,6 +15,7 @@ services:
 
   # back:
   #   build: ./src/back
+    user: "${UID}:${GID}"
   #   volumes:
   #     - ./src/back:/app
   #     - ./src/back/node_modules:/node_modules
@@ -28,8 +29,11 @@ services:
     ports:
       - 27017:27017
     volumes:
+      - /etc/passwd:/etc/passwd
+      - /etc/group:/etc/group
       - ./data/mongo:/data/db
       - ./data/backup/mongodb:/backup
+    user: "${UID}:${GID}"
     restart: always
     healthcheck:
       test: ["CMD", "mongo", "--quiet", "localhost/db", "--eval", "'quit(db.runCommand({ ping: 1 }).ok ? 0 : 1)'"]
