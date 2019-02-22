@@ -1,0 +1,39 @@
+version: "3.0"
+
+services:
+  front:
+    build: ./src/front
+    ports:
+      - 80:80
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL}
+      - PRODUCTION=${PRODUCTION}
+    volumes:
+      - ./src/front/dist:/app
+      - ./logs/front:/var/log/front
+    restart: always
+
+  # back:
+  #   build: ./src/back
+  #   volumes:
+  #     - ./src/back:/app
+  #     - ./src/back/node_modules:/node_modules
+  #     - ./logs/back:/var/log/back
+  #   # ports:
+  #   #   - 5858:5858      
+  #   restart: always
+
+  mongo:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
+      - ./data/backup/mongodb:/backup
+    restart: always
+    healthcheck:
+      test: ["CMD", "mongo", "--quiet", "localhost/db", "--eval", "'quit(db.runCommand({ ping: 1 }).ok ? 0 : 1)'"]
+      interval: 5s
+      timeout: 3s
+    entrypoint:
+      mongod --bind_ip_all
