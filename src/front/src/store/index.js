@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import Knowledges from '../Model/Knowledges';
+import getters from './getters';
 
 const model = new Knowledges();
 
@@ -12,7 +13,7 @@ export default new Vuex.Store({
   state: {
     knowledges: model.getList(),
   },
-  getters: {},
+  getters,
   actions: {},
   mutations: {},
 });

@@ -1,5 +1,5 @@
 // https://eslint.org/docs/user-guide/configuring
-const webpack = require('eslint-import-resolver-webpack');
+// const webpack = require('eslint-import-resolver-webpack');
 
 module.exports = {
   root: true,
@@ -16,9 +16,16 @@ module.exports = {
   plugins: [
     'vue'
   ],
+  // settings: {
+  //   'import/resolver': webpack,
+  // }, // add your custom rules here
   settings: {
-    'import/resolver': webpack,
-  }, // add your custom rules here
+    'import/resolver': {
+      node: {
+        paths: ['src', 'node_modules']
+      }
+    }
+  },
   rules: {
     // don't require .vue extension when importing
     'import/extensions': ['error', 'never', {
